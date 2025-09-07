@@ -133,13 +133,17 @@ MouseThread::~MouseThread() = default;
 
 void MouseThread::initializeInputMethod(SerialConnection *serialConnection, GhubMouse *gHub)
 {
-    if (serialConnection && serialConnection->isOpen())
+    if (config.input_method == "ARDUINO" && serialConnection && serialConnection->isOpen())
     {
         input_method = std::make_unique<SerialInputMethod>(serialConnection);
     }
-    else if (gHub)
+    else if (config.input_method == "GHUB" && gHub)
     {
         input_method = std::make_unique<GHubInputMethod>(gHub);
+    }
+    else if (config.input_method == "CONTROLLER")
+    {
+        input_method = std::make_unique<ControllerInputMethod>(config.controller_sensitivity);
     }
     else
     {
