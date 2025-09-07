@@ -378,6 +378,12 @@ void OverlayThread()
         input_method_index = 1;
     else if (config.input_method == "ARDUINO")
         input_method_index = 2;
+    else if (config.input_method == "RAZER")
+        input_method_index = 3;
+    else if (config.input_method == "KMBOX")
+        input_method_index = 4;
+    else if (config.input_method == "CONTROLLER")
+        input_method_index = 5;
     else
         input_method_index = 0;
     

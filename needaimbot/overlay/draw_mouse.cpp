@@ -116,7 +116,7 @@ void draw_mouse()
     if (ImGui::CollapsingHeader("Input Method Settings", ImGuiTreeNodeFlags_DefaultOpen))
     {
         // Add "RAZER" and potentially "KMBOX" if applicable
-        std::vector<std::string> input_methods = { "WIN32", "GHUB", "ARDUINO", "RAZER", "KMBOX" }; 
+        std::vector<std::string> input_methods = { "WIN32", "GHUB", "ARDUINO", "RAZER", "KMBOX", "CONTROLLER" }; 
         std::vector<const char*> method_items;
         method_items.reserve(input_methods.size());
         for (const auto& item : input_methods)
@@ -146,7 +146,7 @@ void draw_mouse()
                              "GHUB: Logitech G Hub driver (if installed and supported). Generally safer.\n"
                              "ARDUINO: Requires a connected Arduino board flashed with appropriate firmware.\n"
                              "RAZER: Uses a specific Razer driver DLL (rzctl.dll). Requires DLL path.\n"
-                             "KMBOX: Uses kmBoxNet library (requires B box hardware).");
+                             "KMBOX: Uses kmBoxNet library (requires B box hardware).\n"                             "CONTROLLER: Emulates a virtual gamepad via ViGEm.");
         }
 
         // Display GHUB version if GHUB method is selected or potentially usable
