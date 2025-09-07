@@ -223,6 +223,11 @@ void initializeInputMethod()
             }
         }
     }
+    else if (config.input_method == "CONTROLLER")
+    {
+        std::cout << "[Mouse] Using controller method input." << std::endl;
+        new_input_method_instance = std::make_unique<ControllerInputMethod>(config.controller_sensitivity);
+    }
     else if (config.input_method == "KMBOX")
     {
         std::cout << "[Mouse] Using kmboxNet method input.\n";

@@ -144,6 +144,47 @@ public:
     }
 };
 
+// Controller-based input implementation using right-stick aiming
+class ControllerInputMethod : public InputMethod
+{
+public:
+    explicit ControllerInputMethod(float sensitivity) : sensitivity_(sensitivity) {}
+
+    void move(int x, int y) override
+    {
+        INPUT input = {0};
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_MOVE;
+        input.mi.dx = static_cast<LONG>(x * sensitivity_);
+        input.mi.dy = static_cast<LONG>(y * sensitivity_);
+        SendInput(1, &input, sizeof(INPUT));
+    }
+
+    void press() override
+    {
+        INPUT input = {0};
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_LEFTDOWN;
+        SendInput(1, &input, sizeof(INPUT));
+    }
+
+    void release() override
+    {
+        INPUT input = {0};
+        input.type = INPUT_MOUSE;
+        input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
+        SendInput(1, &input, sizeof(INPUT));
+    }
+
+    bool isValid() const override
+    {
+        return true; // No additional initialization required
+    }
+
+private:
+    float sensitivity_;
+};
+
 
 // kmboxNet-based mouse input implementation
 class KmboxInputMethod : public InputMethod {

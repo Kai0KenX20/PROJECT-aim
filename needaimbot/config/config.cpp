@@ -74,6 +74,7 @@ bool Config::loadConfig(const std::string& filename)
         norecoil_step = 5.0f;
         norecoil_ms = 10.0f;
         input_method = "WIN32";
+        controller_sensitivity = 1.0f;
         easynorecoil_start_delay_ms = 0;
         easynorecoil_end_delay_ms = 0;
 
@@ -271,6 +272,7 @@ bool Config::loadConfig(const std::string& filename)
     norecoil_step = (float)get_double_ini("Mouse", "norecoil_step", 5.0);
     norecoil_ms = (float)get_double_ini("Mouse", "norecoil_ms", 10.0);
     input_method = get_string_ini("Mouse", "input_method", "WIN32");
+    controller_sensitivity = (float)get_double_ini("Mouse", "controller_sensitivity", 1.0);
     easynorecoil_start_delay_ms = get_long_ini("Mouse", "easynorecoil_start_delay_ms", 0);
     easynorecoil_end_delay_ms = get_long_ini("Mouse", "easynorecoil_end_delay_ms", 0);
     bScope_multiplier = (float)get_double_ini("Mouse", "bScope_multiplier", 1.2);
@@ -470,6 +472,8 @@ bool Config::saveConfig(const std::string& filename)
     file << "norecoil_ms = " << norecoil_ms << "\n";
     file << std::noboolalpha;
     file << "input_method = " << input_method << "\n";
+    file << std::fixed << std::setprecision(6);
+    file << "controller_sensitivity = " << controller_sensitivity << "\n";
     file << std::fixed << std::setprecision(6);
     file << "easynorecoil_start_delay_ms = " << easynorecoil_start_delay_ms << "\n";
     file << "easynorecoil_end_delay_ms = " << easynorecoil_end_delay_ms << "\n";

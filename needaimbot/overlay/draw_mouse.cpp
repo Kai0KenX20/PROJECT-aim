@@ -9,6 +9,7 @@
 #include "needaimbot.h"
 #include "include/other_tools.h"
 #include "overlay.h" // Include necessary header for key_names etc.
+#include <algorithm>
 
 std::string ghub_version = get_ghub_version();
 
@@ -115,8 +116,8 @@ void draw_mouse()
     ImGui::Spacing(); // Add spacing before Input Method settings header
     if (ImGui::CollapsingHeader("Input Method Settings", ImGuiTreeNodeFlags_DefaultOpen))
     {
-        // Add "RAZER" and potentially "KMBOX" if applicable
-        std::vector<std::string> input_methods = { "WIN32", "GHUB", "ARDUINO", "RAZER", "KMBOX" }; 
+        // Add "RAZER", "KMBOX" and "CONTROLLER" if applicable
+        std::vector<std::string> input_methods = { "WIN32", "GHUB", "ARDUINO", "RAZER", "KMBOX", "CONTROLLER" };
         std::vector<const char*> method_items;
         method_items.reserve(input_methods.size());
         for (const auto& item : input_methods)
@@ -146,7 +147,8 @@ void draw_mouse()
                              "GHUB: Logitech G Hub driver (if installed and supported). Generally safer.\n"
                              "ARDUINO: Requires a connected Arduino board flashed with appropriate firmware.\n"
                              "RAZER: Uses a specific Razer driver DLL (rzctl.dll). Requires DLL path.\n"
-                             "KMBOX: Uses kmBoxNet library (requires B box hardware).");
+                             "KMBOX: Uses kmBoxNet library (requires B box hardware).\n"
+                             "CONTROLLER: Outputs movement to a game controller's right stick.");
         }
 
         // Display GHUB version if GHUB method is selected or potentially usable
@@ -212,8 +214,29 @@ void draw_mouse()
             ImGui::Unindent(10.0f);
         }
 
+        // Controller settings
+        if (config.input_method == "CONTROLLER")
+        {
+            ImGui::Indent(10.0f);
+            ImGui::SeparatorText("Controller Settings");
+
+            ImGui::PushItemWidth(100);
+            if (ImGui::InputFloat("Right-stick Sensitivity", &config.controller_sensitivity, 0.1f, 1.0f, "%.2f"))
+            {
+                config.controller_sensitivity = std::max(0.0f, config.controller_sensitivity);
+                config.saveConfig();
+            }
+            ImGui::PopItemWidth();
+            if (ImGui::IsItemHovered())
+            {
+                SetWrappedTooltip("Multiplier applied to right-stick output when using controller input.");
+            }
+
+            ImGui::Unindent(10.0f);
+        }
+
         // Kmbox Settings (assuming kmboxNet library is integrated elsewhere)
-        if (config.input_method == "KMBOX") 
+        if (config.input_method == "KMBOX")
         {
             ImGui::Indent(10.0f);
             ImGui::SeparatorText("Kmbox Settings");
