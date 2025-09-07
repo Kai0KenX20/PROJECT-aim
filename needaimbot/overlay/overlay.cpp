@@ -378,8 +378,6 @@ void OverlayThread()
         input_method_index = 1;
     else if (config.input_method == "ARDUINO")
         input_method_index = 2;
-    else if (config.input_method == "CONTROLLER")
-        input_method_index = 3;
     else
         input_method_index = 0;
     

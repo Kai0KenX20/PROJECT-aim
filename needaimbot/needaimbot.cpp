@@ -24,6 +24,7 @@
 #include "config.h"
 #include "detector/detector.h"
 #include "mouse/input_drivers/kmboxNet.h"
+#include "mouse/input_drivers/ControllerInputMethod.h"
 #include "capture/optical_flow.h"
 
 // Include headers for version checking
@@ -259,6 +260,19 @@ void initializeInputMethod()
         catch (const std::exception& e) {
             std::cerr << "[Mouse] Razer initialization failed: " << e.what() << ". Defaulting to Win32." << std::endl;
             // Additional error messages from original code can be kept if desired.
+        }
+    }
+    else if (config.input_method == "CONTROLLER")
+    {
+        std::cout << "[Mouse] Using Controller input method." << std::endl;
+        auto method = std::make_unique<ControllerInputMethod>();
+        if (method->isValid())
+        {
+            new_input_method_instance = std::move(method);
+        }
+        else
+        {
+            std::cerr << "[Controller] Failed to initialize ViGEm. Defaulting to Win32." << std::endl;
         }
     }
     

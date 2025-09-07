@@ -65,6 +65,7 @@
     <ClCompile Include="needaimbot.cpp" />
     <ClCompile Include="security\anti_detection.cpp" />
     <ClCompile Include="tensorrt\nvinf.cpp" />
+    <ClCompile Include="mouse\input_drivers\ControllerInputMethod.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CudaCompile Include="detector\filterGpu.cu" />
@@ -97,6 +98,7 @@
     <ClInclude Include="mouse\ghub.h" />
     <ClInclude Include="mouse\HidTable.h" />
     <ClInclude Include="mouse\InputMethod.h" />
+    <ClInclude Include="mouse\input_drivers\ControllerInputMethod.h" />
     <ClInclude Include="mouse\input_drivers\RawHidMouse.h" />
     <ClInclude Include="mouse\IPredictor.h" />
     <ClInclude Include="mouse\KalmanFilterPredictor.h" />
@@ -237,7 +239,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world4130d.lib;nvinfer_10.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world4130d.lib;nvinfer_10.lib;ViGEmClient.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Grey\Desktop\New folder %282%29\needaimbot\needaimbot\modules\TensorRT-10.13.2.6\lib;C:\Users\Grey\Desktop\New folder %282%29\needaimbot\needaimbot\modules\opencv\install\x64\vc17\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -261,7 +263,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opencv_world4130.lib;nvinfer_10.lib;nvonnxparser_10.lib;WindowsApp.lib;d3d11.lib;dxgi.lib;d2d1.lib;cuda.lib;cudart.lib;glfw3_mt.lib;glfw3dll.lib;serial.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opencv_world4130.lib;nvinfer_10.lib;nvonnxparser_10.lib;WindowsApp.lib;d3d11.lib;dxgi.lib;d2d1.lib;cuda.lib;cudart.lib;glfw3_mt.lib;glfw3dll.lib;serial.lib;ViGEmClient.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>C:\Users\Grey\Desktop\New folder %288%29\needaimbot\needaimbot\modules\TensorRT-10.13.2.6\lib;C:\Users\Grey\Desktop\New folder %282%29\needaimbot\needaimbot\modules\TensorRT-10.13.2.6\lib;C:\opencv_build\install\x64\vc17\lib;C:\Users\th072\Desktop\sunone_norecoil\needaimbot\modules\serial\visual_studio\x64\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <Manifest>
